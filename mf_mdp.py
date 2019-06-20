@@ -106,7 +106,8 @@ class mf_mdp_model():
         
         S = p_0 + r*p_down + r*p_up
         ev, left_v, right_v = linalg.eig(S, left = True)
-        steady = right_v[:,0]
+        steady_index = np.real(ev).argmax()
+        steady = right_v[:,steady_index]
         Q = steady/steady.sum()
     
         P = self.initial_state
@@ -143,7 +144,8 @@ class mf_mdp_model():
         
         S = p_0 + r*p_down + r*p_up
         ev, left_v, right_v = linalg.eig(S, left = True)
-        steady = right_v[:,0]
+        steady_index = np.real(ev).argmax()
+        steady = right_v[:,steady_index]
         Q = steady/steady.sum()
     
         P = self.initial_state
@@ -184,7 +186,8 @@ class mf_mdp_model():
         S = p_0 + r*p_down + r*p_up
         L = (p_0.T).dot(p_0)
         ev, left_v, right_v = linalg.eig(S, left = True)
-        steady = right_v[:,0]
+        steady_index = np.real(ev).argmax()
+        steady = right_v[:,steady_index]
         Q = steady/steady.sum()
         
         SS = p_0 + r*p_up + r*p_down + \
@@ -224,7 +227,8 @@ class mf_mdp_model():
         S = p_0 + r*p_down + r*p_up
         L = (p_0.T).dot(p_0)
         ev, left_v, right_v = linalg.eig(S, left = True)
-        steady = right_v[:,0]
+        steady_index = np.real(ev).argmax()
+        steady = right_v[:,steady_index]
         Q = steady/steady.sum()
     
         SS = p_0 + r*p_up + r*p_down + 2*r*alpha*np.einsum("i,j->ij",\
@@ -260,7 +264,8 @@ class mf_mdp_model():
         
         S = p_0 + r*p_down + r*p_up
         ev, left_v, right_v = linalg.eig(S, left = True)
-        steady = right_v[:,0]
+        steady_index = np.real(ev).argmax()
+        steady = right_v[:,steady_index]
         Q = steady/steady.sum()
         check_vec = right_v[:, np.abs(np.angle(ev) + 1e-5).argsort()]
         
@@ -291,7 +296,8 @@ class mf_mdp_model():
         
         S = p_0 + r*p_down + r*p_up
         ev, left_v, right_v = linalg.eig(S, left = True)
-        steady = right_v[:,0]
+        steady_index = np.real(ev).argmax()
+        steady = right_v[:,steady_index]
         Q = steady/steady.sum()
         
         return Q
@@ -307,7 +313,8 @@ class mf_mdp_model():
         
         S = p_0 + r*p_down + r*p_up
         ev, left_v, right_v = linalg.eig(S, left = True)
-        steady = right_v[:,0]
+        steady_index = np.real(ev).argmax()
+        steady = right_v[:,steady_index]
         Q = steady/steady.sum()
     
         SS = p_0 + r*p_up + r*p_down + 2*r*alpha*np.einsum("i,j->ij", np.dot(p_down, Q), consumption_vector) - 2*r*alpha*np.einsum("i,j->ij", np.dot(p_up, Q), consumption_vector)
@@ -330,7 +337,8 @@ class mf_mdp_model():
         
         S = p_0 + r*p_down + r*p_up
         ev, left_v, right_v = linalg.eig(S, left = True)
-        steady = right_v[:,0]
+        steady_index = np.real(ev).argmax()
+        steady = right_v[:,steady_index]
         Q = steady/steady.sum()
         check_vec = right_v[:, np.abs(np.angle(ev) + 1e-5).argsort()]
         
